@@ -1,4 +1,4 @@
-# Project X
+## ![](https://github.com/IamNaN/projectx/blob/master/extensions/chrome/logo.png) Project X
 WIP - Not ready for primetime or contributions
 
 The purpose of Project X is to add some missing features to Github's project boards. Initially, this will be:
