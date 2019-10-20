@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Github time estimates",
+  "version": "0.1",
+  "description": "Add time estimates to github issues and time spent to pull requests. Displays the results in Project cards and the issue/project details side-panel.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/issues"
+      ],
+      "js": ["jquery-3.4.1.min.js", "content.js"]
+    }
+  ]
+}
