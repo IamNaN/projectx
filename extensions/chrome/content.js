@@ -1,20 +1,18 @@
 // config
-var token = "619912bfb465edf0f936ed7f25369b4fdccd7e1a"
-var user = "IAmNaN"
-var repo = "aimee"
+var options = {}
 var dataSet = {}
 
-function queryGithub(t,u,r) {
+function queryGithub(token,user,repo) {
   $.ajax({
     method: "POST",
     url: "https://api.github.com/graphql",
     contentType: "application/json",
     headers: {
-      Authorization: "bearer " + t
+      Authorization: "bearer " + token
     },
     data: JSON.stringify({
       query: `query {
-        repository(owner:"` + u + `", name:"` + r + `") {
+        repository(owner:"` + user + `", name:"` + repo + `") {
           issues(last: 100) {
             edges {
               node {
@@ -35,6 +33,16 @@ function queryGithub(t,u,r) {
   })
   .fail(function(failed) {
     console.log(failed)
+  })
+}
+
+function loadOptions() {
+  chrome.storage.sync.get(function(data) {
+    options = data;
+    var pathArray = window.location.pathname.split('/');
+    options["ghUser"] = pathArray[1]
+    options["ghRepo"] = pathArray[2]
+    queryGithub(options["ghToken"], options["ghUser"], options["ghRepo"])
   })
 }
 
@@ -71,6 +79,4 @@ function updateUI() {
   })  
 }
 
-queryGithub(token, user, repo)
-
-// debugger
+loadOptions()
